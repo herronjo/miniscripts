@@ -98,6 +98,27 @@ function setupDialog() {
 chrome.storage.onChanged.addListener(loadScripts);
 
 window.addEventListener("load", () => {
+	if (!document.querySelector("dialog").showModal) {
+		document.querySelector("dialog").showModal = function() {
+			var backgroundDiv = document.createElement("DIV");
+			backgroundDiv.style.zIndex = 1;
+			backgroundDiv.style.width = "100vw";
+			backgroundDiv.style.height = "100vh";
+			backgroundDiv.style.backgroundColor = "#000000";
+			backgroundDiv.style.opacity = 0.5;
+			backgroundDiv.setAttribute("id","backgroundDiv");
+			document.querySelector("body").appendChild(backgroundDiv);
+			document.querySelector("dialog").style.zIndex = 2;
+			document.querySelector("dialog").style.position = "absolute";
+			document.querySelector("dialog").style.transform = "translateY(50%)";
+			document.querySelector("dialog").setAttribute("open", null);
+		}
+		document.querySelector("dialog").close = function() {
+			document.querySelector("dialog").removeAttribute("open");
+			var backgroundDiv = document.querySelector("#backgroundDiv");
+			backgroundDiv.parentNode.removeChild(backgroundDiv);
+		}
+	}
 	document.querySelector("#scriptsTab").addEventListener("click", () => {
 		document.querySelector("#scriptsContent").style.display = "block";
 		document.querySelector("#aboutContent").style.display = "none";

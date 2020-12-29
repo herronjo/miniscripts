@@ -10,7 +10,7 @@ function execScript(id) {
 
 window.addEventListener("load", () => {
 	document.querySelector("#optionsButton").addEventListener("click", () => {
-		if (chrome.runtime.openOptionsPage) {
+		if (chrome.runtime.openOptionsPage && !(navigator.userAgent.indexOf("Firefox") > -1)) {
 			chrome.runtime.openOptionsPage();
 		} else {
 			window.open(chrome.runtime.getURL("options.html"));

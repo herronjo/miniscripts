@@ -17,5 +17,10 @@
 		"storage",
 		"activeTab"
 	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "miniscripts@mkps.app"
+		}
+	},
 	"manifest_version": 2
 }
