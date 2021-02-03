@@ -34,11 +34,11 @@ chrome.notifications.onClicked.addListener((id) => {
 				if (chrome.runtime.openOptionsPage && !(navigator.userAgent.indexOf("Firefox") > -1)) {
 					chrome.runtime.openOptionsPage();
 				} else {
-					window.open(chrome.runtime.getURL("options.html"));
+					browser.tabs.create({url: chrome.runtime.getURL("options.html")});
 				}
 				break;
 			default:
-				window.open(notificationActions[id]);
+				browser.tabs.create({url: notificationActions[id]});
 		}
 	}
 });
